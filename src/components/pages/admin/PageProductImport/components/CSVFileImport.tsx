@@ -54,7 +54,7 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
       });
       console.log('Result: ', result);
     } catch (err) {
-      console.error('coto?: ', err);
+      console.error('Error: ', err);
     }
 
     setFile('');
