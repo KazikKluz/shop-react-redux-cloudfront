@@ -108,7 +108,7 @@ export default function PageProductForm() {
       ? { ...ProductSchema.cast(formattedValues), id }
       : formattedValues;
     axios
-      .post(`${API_PATHS.products}`, productToSave, {
+      .post(`${API_PATHS.bff}/products`, productToSave, {
         headers: {
           'Access-Control-Allow-Headers': 'Content-Type',
           'Access-Control-Allow-Origin': '*',
@@ -123,7 +123,7 @@ export default function PageProductForm() {
       setIsLoading(false);
       return;
     }
-    axios.get(`${API_PATHS.products}/${id}`).then((res) => {
+    axios.get(`${API_PATHS.bff}/products?productId=${id}`).then((res) => {
       setProduct(res.data);
       setIsLoading(false);
     });
