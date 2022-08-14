@@ -11,7 +11,6 @@ import { formatAsPrice } from 'utils/utils';
 import AddProductToCart from 'components/AddProductToCart/AddProductToCart';
 import axios from 'axios';
 import API_PATHS from 'constants/apiPaths';
-import productList from './productList.json';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -20,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   cardMedia: {
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '100%', // 16:9
   },
   cardContent: {
     flexGrow: 1,
@@ -37,9 +36,7 @@ export default function Products() {
 
   useEffect(() => {
     axios.get(`${API_PATHS.bff}/products`).then((res) => setProducts(res.data));
-    setProducts(productList);
   }, []);
-
   return (
     <Grid container spacing={4}>
       {products.map((product: Product, index: number) => (
@@ -47,12 +44,15 @@ export default function Products() {
           <Card className={classes.card}>
             <CardMedia
               className={classes.cardMedia}
-              image={`https://source.unsplash.com/random?sig=${index}`}
+              image={product.imageurl}
               title='Image title'
             />
             <CardContent className={classes.cardContent}>
               <Typography gutterBottom variant='h5' component='h2'>
                 {product.title}
+              </Typography>
+              <Typography gutterBottom variant='subtitle1' component='h2'>
+                {product.description}
               </Typography>
               <Typography>{formatAsPrice(product.price)}</Typography>
             </CardContent>
